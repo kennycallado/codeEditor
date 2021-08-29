@@ -1,5 +1,16 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# Creo que también habría que quitar resources
+/resources/*
+
+# Neutralinojs binaries and builds
+/bin
+/dist
+
+# Neutralinojs related files
+.storage
+*.log
+
 # compiled output
 /dist
 /tmp
