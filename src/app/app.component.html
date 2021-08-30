@@ -1,9 +1,12 @@
 <div class="row">
   <div class="col-6 text-center mt-5">
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Click me
     </button>
+
+    <button class="btn btn-success ms-2" (click)="getUser()">Get User</button>
+
   </div>
 </div>
 
@@ -25,4 +28,11 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="m-2 p-2 bg-success">
+  <pre>
+    {{env}}
+    {{log}}
+  </pre>
 </div>
