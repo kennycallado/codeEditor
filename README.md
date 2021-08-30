@@ -29,3 +29,5 @@ if (!enviroment.production) {}
 ```
 
 Y en todas las llamadas a `Neutralino` comprobar el modo de la aplicación
+
+He probado si hay alguna forma de que angular injecte _assets/js/neutralino.js_ en _index.html_ pero no encuentro la forma...
