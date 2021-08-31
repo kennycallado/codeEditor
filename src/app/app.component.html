@@ -1,12 +1,35 @@
-<div class="row">
-  <div class="col-6 text-center mt-5">
+<div class="container-flex" style="height: 100%;">
+  <div class="row mt-2">
+    <div class="col-6" style="height: 70vh;">
+      <textarea #ref [value]="value"></textarea>
+    </div>
+    <div class="col-5" style="border: 2px solid whitesmoke; box-shadow: 2px 2px 10px 2px #fff4;">
+      aquí va el renderizado html
+    </div>
+  </div>
+</div>
 
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Click me
-    </button>
+<div class="container">
+  <div class="row">
+    <div class="col-6 text-center">
 
-    <button class="btn btn-success ms-2" (click)="getUser()">Get User</button>
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Click me
+      </button>
 
+      <button class="btn btn-success ms-2" (click)="getUser()">Get User</button>
+
+    </div>
+    <div class="col-6">
+      <div class="m-2 p-2 bg-dark">
+
+        <code>
+          {{env}}
+          {{log}}
+        </code>
+
+      </div>
+    </div>
   </div>
 </div>
 
@@ -28,11 +51,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="m-2 p-2 bg-success">
-  <pre>
-    {{env}}
-    {{log}}
-  </pre>
 </div>

@@ -1,6 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "~codemirror/lib/codemirror";
+
+/* estos van a ser los themes */
+@import '~codemirror/theme/solarized';
+/* @import '~codemirror/theme/the-matrix'; */
+
 body {
+  height: 80vh;
   background-color: #123;
   color: whitesmoke;
 }

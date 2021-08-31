@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "bootstrap": "^5.1.0",
+    "codemirror": "^5.62.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -27,6 +28,7 @@
     "@angular-devkit/build-angular": "~12.2.3",
     "@angular/cli": "~12.2.3",
     "@angular/compiler-cli": "~12.2.0",
+    "@types/codemirror": "^5.60.2",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.8.0",

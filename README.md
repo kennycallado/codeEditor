@@ -30,4 +30,50 @@ if (!enviroment.production) {}
 
 Y en todas las llamadas a `Neutralino` comprobar el modo de la aplicación
 
-He probado si hay alguna forma de que angular injecte _assets/js/neutralino.js_ en _index.html_ pero no encuentro la forma...
+He probado si hay alguna forma de que angular injecte _assets/js/neutralino.js_ en _index.html_ pero no encuentro la
+forma...
+
+## Notas:
+
+Ahora se trata de integrar codemirror con angular. Una vez que funcione comprobar que también se ejecuta sobre
+neutralino. Esto me daba error el ejecutar en neutralino, ya que no ingresaba las dependencias en _index.html_ como he
+hecho en el paso anterior. Bueno pues voy a echar un ojo a ver que tal.
+
+Ahora que me acuerdo, esto solo funcionaba con ngx-codemirror, no conesguí integrarlo este paquete.
+
+La parte del CSS es fácil solo hay que importar...
+
+**Bien** he conseguido integrar el editor en la aplicación. Tengo que pensar como voy a manejar las opciones de
+configuración. Por ejemplo para seleccionar temas o cosas así..
+
+Me gusta la sombra que tiene _solarized_ pero si pongo el número de línea lo pierde
+
+En _the-matrix_ los número de línea mola, mientras que en solarized no tanto.
+
+Debe haber una opción para activar solarized dark.
+
+
+**Por fin** Creo que ya lo he entendido. El problema era poner defer en la etiqueta script de neutralino. De este modo
+no paraliza la carga de los módulos desde angular.
+
+
+Quizá podría reducir el contenido de codemirror ya que está haciendo bundle de todo y por eso pesa más la aplicación.
+Para ser un aplicación de escritorio no es problema imagino.
+
+Creo que he probado bastante bien que funciona en produción correctamente, creo que puedo pasar a master sin miedo.
+Antes voy a hacer algunas mejorar de estilo.
+
+No es nada fácil dar estilo al editor... joder.. voy a seguir mañana
+
+TODO:
+- Revisar stilos
+- Revisar layout
+- Revisar si es necesario tener en assets/js/codemirro
+
+---
+
+Echar un ojo a esta página:
+
+- https://medium.com/@Idan_Co/the-ultimate-print-html-template-with-header-footer-568f415f6d2a
+- demo -> https://plnkr.co/edit/lWk6Yd?preview <-
+
