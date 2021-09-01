@@ -1,41 +1,51 @@
-<div class="container-flex" style="height: 100%;">
-  <div class="row mt-2">
-    <div class="col-6" style="height: 70vh;">
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item"><a class="nav-link" href="#">perro</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">perro</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">perro</a></li>
+      <li class="nav-item"><a class="nav-link" href="#" (click)="reloadIframe()">Reload</a></li>
+
+    </ul>
+
+  </div>
+
+</nav>
+
+<div class="container-fluid mt-1">
+  <div class="row">
+    <div class="col-6 p-0" style="height: 80vh;">
       <textarea #ref [value]="value"></textarea>
     </div>
-    <div class="col-5" style="border: 2px solid whitesmoke; box-shadow: 2px 2px 10px 2px #fff4;">
-      aquí va el renderizado html
+    <div class="col-6 p-0">
+      <iframe id="iframe" #iframe sandbox="allow-scripts allow-same-origin" [src]="iframeContent | safepipe"
+        style="height: 100%; width: 100%;" (load)="loadIframe()"></iframe>
     </div>
   </div>
 </div>
 
+<!--
 <div class="container">
-  <div class="row">
-    <div class="col-6 text-center">
-
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Click me
-      </button>
-
-      <button class="btn btn-success ms-2" (click)="getUser()">Get User</button>
-
-    </div>
-    <div class="col-6">
-      <div class="m-2 p-2 bg-dark">
-
-        <code>
-          {{env}}
-          {{log}}
-        </code>
-
-      </div>
+  <div class="mt-2">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Click me
+    </button>
+    <button class="btn btn-success ms-2" (click)="getUser()">Get User</button>
+    <button class="btn btn-warning ms-2" (click)="saveIframe()">Get User</button>
+    <div class="m-2 p-2 bg-dark">
+      <code>
+        {{env}}
+        {{log}}
+      </code>
     </div>
   </div>
 </div>
+-->
 
 <!-- Button trigger modal -->
 
 <!-- Modal -->
+<!--
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -52,3 +62,4 @@
     </div>
   </div>
 </div>
+-->
