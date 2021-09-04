@@ -1,25 +1,17 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark">
-  <div class="container-fluid">
-    <ul class="navbar-nav mx-auto">
-      <li class="nav-item"><a class="nav-link" href="#">perro</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">perro</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">perro</a></li>
-      <li class="nav-item"><a class="nav-link" href="#" (click)="reloadIframe()">Reload</a></li>
-
-    </ul>
-
-  </div>
-
-</nav>
+<app-navigator></app-navigator>
 
 <div class="container-fluid mt-1">
+
   <div class="row">
-    <div class="col-6 p-0" style="height: 80vh;">
-      <textarea #ref [value]="value"></textarea>
+    <div class="col-6 p-0" style="height: 90vh;">
+
+      <app-editor></app-editor>
+
     </div>
     <div class="col-6 p-0">
-      <iframe id="iframe" #iframe sandbox="allow-scripts allow-same-origin" [src]="iframeContent | safepipe"
-        style="height: 100%; width: 100%;" (load)="loadIframe()"></iframe>
+
+      <app-preview></app-preview>
+
     </div>
   </div>
 </div>

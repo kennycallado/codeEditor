@@ -7,7 +7,7 @@
 /* @import '~codemirror/theme/the-matrix'; */
 
 body {
-  height: 80vh;
+  height: 100vh;
   background-color: #123;
   color: whitesmoke;
 }

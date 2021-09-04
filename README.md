@@ -77,4 +77,7 @@ Echar un ojo a esta página:
 - https://medium.com/@Idan_Co/the-ultimate-print-html-template-with-header-footer-568f415f6d2a
 - demo -> https://plnkr.co/edit/lWk6Yd?preview <- - iframe -> https://blog.logrocket.com/the-ultimate-guide-to-iframes/
 
-  **ooh mierda** algo va mal con el build...
+
+  Bueno hsata este punto he conseguido dividir la aplicación en diferentes componenes.
+
+  no entiendo xq mierda este docuemnto apartir de este punto tiene sangría
