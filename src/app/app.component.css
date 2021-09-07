@@ -1,0 +1,17 @@
+@page { margin: 0; }
+
+@media screen {
+  .hidden {
+    display: none;
+  }
+}
+
+@media print {
+  app-navigator, .row{
+    display: none;
+  }
+
+  h2 {
+    page-break-before: always;
+  }
+}

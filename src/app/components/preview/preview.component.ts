@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MarkdownItService } from 'src/app/services/markdown-it.service';
+import { IframeContent } from '../iframe-content';
 
 @Component({
   selector: 'app-preview',
@@ -9,6 +10,8 @@ import { MarkdownItService } from 'src/app/services/markdown-it.service';
 export class PreviewComponent implements OnInit {
   @ViewChild('iframe') iframe!: ElementRef<HTMLIFrameElement>
   value: string = "";
+  content: IframeContent = new IframeContent();
+
 
   constructor(private markdownIt: MarkdownItService) { }
 
@@ -82,13 +85,6 @@ export class PreviewComponent implements OnInit {
         }
       }
     `;
-
-  iframeOtherJs = function algo(param = "") {
-    let una = document.createElement('h1')
-    una.innerText = param ? param : "Texto";
-
-    document.body.insertAdjacentElement('beforeend', una)
-  }
 
   iframeMainJs = function() {
     const resizeObserver = new ResizeObserver(entries => {
@@ -192,7 +188,9 @@ export class PreviewComponent implements OnInit {
     }
   }
 
-  iframeContent =
+  iframeContent = this.content.html;
+
+  iframeContent2 =
     `data:text/html,
     <!DOCTYPE html>
     <html lang="en">
