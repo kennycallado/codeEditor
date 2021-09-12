@@ -2,10 +2,12 @@
   <div class="container-fluid">
     <ul class="navbar-nav mx-auto">
 
-      <li class="nav-item"><a class="nav-link" href="#">perro</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">perro</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Refresh</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Reload</a></li>
+      <li class="nav-item"><a class="nav-link">File</a></li>
+      <li class="nav-item"><a class="nav-link" (click)="inputFile.click()">AddImage</a></li>
+      <input #inputFile class="d-none" type="file" multiple="true" accept="image/*" (change)="addImages($event)">
+      <li class="nav-item"><a class="nav-link" (click)="imprimir()">Print</a></li>
+      <li class="nav-item"><a class="nav-link">VimMode</a></li>
+      <!-- <li class="nav-item"><a class="nav-link" href="#">Reload</a></li> -->
 
     </ul>
   </div>

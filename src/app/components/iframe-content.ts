@@ -35,6 +35,7 @@ export class IframeContent {
 
 
     /* CHECKERS */
+    /* breaks */
     /*@ts-ignore*/
     window.checkBefore = function checkBefore() {
       let breakBeforeElements = document.querySelectorAll(".break-before");
@@ -56,6 +57,31 @@ export class IframeContent {
       }
     }
 
+    /* images */
+    /*@ts-ignore*/
+    window.checkImages = function checkImages() {
+      /* De alguna forma tengo que recibir el array de imagenes */
+      let imagesList = [];
+      let imgElements = document.querySelectorAll("img");
+
+      /*@ts-ignore*/
+      for (let element of imgElements) {
+        /*por cada elemento voy a sustituir su src por*/
+        /*el que obtenga de la imagesList*/
+        /*debe haber igualdad en los nombres de alguna forma*/
+        /*creo que el usuario pondrá image-1 en el src */
+        /*esto será sustituido por igual nombre en imagesList*/
+        /*windows.imagesList contiene array [{name: ..., content}]*/
+
+        /*@ts-ignore*/
+        window.imagesList.find((item) => {
+          item.name == element.src;
+        })
+      }
+    }
+
+    /* OTRO APARTADO */
+    /* relacionado con el resizeObserver */
     function createPage() {
       pages++;
       let hr = document.createElement("hr");
@@ -104,14 +130,19 @@ export class IframeContent {
 
       return result;
     }
-
   }
 
   css: string =
     `
       * {
         margin: 0;
+        padding: 0;
       }
+      
+      body {
+        width: 210mm;
+      }
+
 
       p {
         margin-top: 10px;
@@ -132,6 +163,15 @@ export class IframeContent {
           width: 70%;
           position: absolute;
         }
+
+        p > img {
+          display: block;
+        }
+
+        img {
+          width: 50%;
+          margin: 0 auto;
+        }
       }
     `;
 
@@ -140,7 +180,7 @@ export class IframeContent {
     <!DOCTYPE html>
     <html lang="en">
       <head>
-        <title></title>
+        <title>Testing</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="assets/style.css" rel="stylesheet">
@@ -152,23 +192,65 @@ export class IframeContent {
 
       <div class="contenido"></div>
 
-      <pre id="logger" style="background-color: black; color: white; margin-top: 2rem;">hola</pre>
 
+      <script>
+        window.imagesList = []
+      </script>
 
       <script>
         window.onmessage = function(event){
             if (event.data.html) {
+              /*Cada vez que llega contenido desde editor*/
+                
+                /*Injecta al dom*/
               document.querySelector(".contenido").innerHTML = event.data.html;
-              window.checkBefore()
-            } else if (event.data.print) {
-              window.print()
-            } else if (event.data.reload) {
-              window.location.reload();
-            }
+                /*comprueba imagenes*/
+
+              /*Busca todos elementos img*/
+              let imageElements = document.querySelectorAll("img");
+              if(imageElements.length > 0 && window.imagesList.length > 0){
+
+                /*Por cada elemento que encuentra*/
+                for(let element of imageElements) {
+
+                  /*busca src en imageslist name*/
+                  let foundElement;
+                  foundElement = window.imagesList.find((listElement) => {
+                    return listElement.name === element.src;
+                  });
+
+                  if(foundElement) {
+                    element.src = foundElement.content;
+                  }
+                }
+                  /*element.src = window.imagesList[0].content*/
+              }
+
+                /*Comprueba saltos de línea*/
+              window.checkBefore();
+                /*Devuelve el tamaño del iframe*/
+                /*para redimensionar el espacio en el padre*/
+              window.top.postMessage({perro: true, height: document.body.clientHeight}, '*');
+            } else if (event.data.images) {
+
+              /* Solo me envian el último */
+              let element = event.data;
+
+              /* comprueba si element existe ya */
+              let duplicated = window.imagesList.some((item) => {
+                return item.name == element.name
+              });
+
+              /* Si no está duplicado lo guardo */
+              if(!duplicated){
+                window.imagesList.push({name: event.data.name, content: event.data.content});
+              }
+            } else if(false) {}
         }
       </script>
 
       <script>
+      /*Creo que esto no me hace falta ya*/
         (function(t,e,o){"use strict";function r(t,e,r,p){r=r||"width";var n,l,m,c=(e.match(s)||[])[2],f="px"===c?1:d[c+"toPx"],u=/r?em/i;if(f||u.test(c)&&!p)t=f?t:"rem"===c?i:"fontSize"===r?t.parentNode||t:t,f=f||parseFloat(a(t,"fontSize")),m=parseFloat(e)*f;else{n=t.style,l=n[r];try{n[r]=e}catch(x){return 0}m=n[r]?parseFloat(a(t,r)):0,n[r]=l!==o?l:null}return m}function a(t,e){var o,n,i,l,d,c=/^top|bottom/,f=["paddingTop","paddingBottom","borderTop","borderBottom"],u=4;if(o=m?m(t)[e]:(n=t.style["pixel"+e.charAt(0).toUpperCase()+e.slice(1)])?n+"px":"fontSize"===e?r(t,"1em","left",1)+"px":t.currentStyle[e],i=(o.match(s)||[])[2],"%"===i&&p)if(c.test(e)){for(l=(d=t.parentNode||t).offsetHeight;u--;)l-=parseFloat(a(d,f[u]));o=parseFloat(o)/100*l+"px"}else o=r(t,o);else("auto"===o||i&&"px"!==i)&&m?o=0:i&&"px"!==i&&!m&&(o=r(t,o)+"px");return o}var p,n=e.createElement("test"),i=e.documentElement,l=e.defaultView,m=l&&l.getComputedStyle,s=/^(-?[\d+\.\-]+)([a-z]+|%)$/i,d={},c=[1/25.4,1/2.54,1/72,1/6],f=["mm","cm","pt","pc","in","mozmm"],u=6;for(i.appendChild(n),m&&(n.style.marginTop="1%",p="1%"===m(n).marginTop);u--;)d[f[u]+"toPx"]=c[u]?c[u]*d.inToPx:r(n,"1"+f[u]);i.removeChild(n),n=o,t.Length={toPx:r}})(this,this.document);
       </script>
 

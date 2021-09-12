@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ImagesService } from 'src/app/services/images.service';
 
 @Component({
   selector: 'app-navigator',
@@ -6,14 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigator.component.css']
 })
 export class NavigatorComponent implements OnInit {
-  constructor() { }
+  @Output() myEvent = new EventEmitter();
 
-  ngOnInit(): void {
+  constructor(private imagesService: ImagesService) { }
+
+  ngOnInit(): void { }
+
+  addImages(event: any) {
+    if (event.target.files.length > 0) {
+      let elements = event.target.files;
+      /*Itera por cada elemento añadido*/
+      for (let i = 0; i < elements.length; i++) {
+        let element = elements[i];
+        this.imagesService.setImage(element);
+      }
+    }
+  }
+
+  imprimir() {
+    this.myEvent.emit();
   }
 
   reloadIframe() { }
 
-  refreshIframe() {
-  }
+  refreshIframe() { }
 
 }

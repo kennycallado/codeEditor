@@ -32,7 +32,7 @@ export class EditorComponent implements OnInit {
 
   ngAfterViewInit() {
     this.codeMirror = CodeMirror.fromTextArea(this.ref.nativeElement, {
-      keyMap: "vim",
+      // keyMap: "vim",
       mode: "markdown",
       autofocus: true,
       theme: this.theme,

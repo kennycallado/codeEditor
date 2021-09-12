@@ -1,4 +1,4 @@
-<app-navigator></app-navigator>
+<app-navigator (myEvent)="imprimir()"></app-navigator>
 
 <div class="container-fluid mt-1">
 
@@ -16,9 +16,10 @@
   </div>
 </div>
 
-<div class="hidden">
-  <iframe #printable [src]="printableContent | safepipe" (load)="loadPrintable()"></iframe>
-</div>
+<img [src]="imageSrc">
+
+<iframe class="hidden" #printable [src]="printableContent | safepipe" (load)="loadPrintable()"
+  [height]="printableHeight"></iframe>
 
 <!--
 <div class="container">

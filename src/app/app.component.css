@@ -1,5 +1,9 @@
 @page { margin: 0; }
 
+.break-before {
+  page-break-before: always;
+}
+
 @media screen {
   .hidden {
     display: none;
@@ -9,9 +13,5 @@
 @media print {
   app-navigator, .row{
     display: none;
-  }
-
-  h2 {
-    page-break-before: always;
   }
 }
