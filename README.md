@@ -1,7 +1,5 @@
 # CodeEditor
 
-![Imagen-1](./screenshot.png)
-
 ## Introducción
 
 Esta aplicación te permite tener una vista previa de un documento escrito en **Markdown** y guardarlo como pdf o incluso imprimirlo. Puede ejecutarse desde un navegador ya que es una _SPA_, o también puede compilarse para funcionar como una aplicación de escritorio.
@@ -40,7 +38,7 @@ Como he comentado la aplicación puede ejecutarse desde cualquier navegador siem
 
 ### Desktop
 
-Una de las principales ideas del proyecto era que fuese una aplicación ejecutable desde el escritorio ya que es como deseaba ejecutarla. Personalmente encuentro que para proyectos sencillos como este usar _electron_ no lo más apropiado.  Tras varias pruebas de _webview_ en diferentes lenguajes coo _go_ y _rust_, decidí que lo más sencillo sería mantener el lenguaje (javascript) usando la herramienta `neutralinojs`. La encuentro muy apropiada para proyectos sencillos sin mucha carga de backend.
+Una de las principales ideas del proyecto era que fuese una aplicación ejecutable desde el escritorio ya que es como deseaba ejecutarla. Personalmente encuentro que para proyectos sencillos como este usar _electron_ no lo más apropiado.  Tras varias pruebas de _webview_ en diferentes lenguajes como _go_ y _rust_, decidí que lo más sencillo sería mantener el lenguaje (javascript) usando la herramienta `neutralinojs`. La encuentro muy apropiada para proyectos sencillos sin mucha carga de backend.
 
 ## Instalación
 
@@ -58,7 +56,7 @@ Entiendo que las dependencias son las siguientes:
 - Windows - Microsoft Edge ?
 - MacOs - Safari ?
 - Neutralinojs
-- `npm i -g @neutralinojs/neu`
+  - `npm i -g @neutralinojs/neu`
 
 ### Pasos
 
