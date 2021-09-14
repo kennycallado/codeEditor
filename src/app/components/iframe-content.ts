@@ -61,7 +61,6 @@ export class IframeContent {
     /*@ts-ignore*/
     window.checkImages = function checkImages() {
       /* De alguna forma tengo que recibir el array de imagenes */
-      let imagesList = [];
       let imgElements = document.querySelectorAll("img");
 
       /*@ts-ignore*/
@@ -148,6 +147,10 @@ export class IframeContent {
         margin-top: 10px;
       }
 
+      ul, ol {
+        margin-left: 2rem;
+      }
+
       @media screen {
         body {
           color: white;
@@ -204,8 +207,12 @@ export class IframeContent {
                 
                 /*Injecta al dom*/
               document.querySelector(".contenido").innerHTML = event.data.html;
-                /*comprueba imagenes*/
 
+              /*comprueba cover*/
+              let editorCoverElement = document.querySelector("cover");
+              if(editorCoverElement) editorCoverElement.style.display = "none";
+
+              /*comprueba imagenes*/
               /*Busca todos elementos img*/
               let imageElements = document.querySelectorAll("img");
               if(imageElements.length > 0 && window.imagesList.length > 0){

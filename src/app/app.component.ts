@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { CoverFlorida } from './components/cover-florida';
 import { ImagesService } from './services/images.service';
 import { MarkdownItService } from './services/markdown-it.service';
 
@@ -28,6 +29,8 @@ export class AppComponent {
         this.printableHeight = event.data.height;
       } else if (event.data.saludo) {
         console.log(event.data.saludo);
+      } else if (event.data.cover) {
+        this.imprimir(CoverFlorida.html);
       }
     })
 
@@ -53,8 +56,8 @@ export class AppComponent {
   }
 
   /* así si que funciona!!1 oog que bien*/
-  imprimir() {
-    this.printable.nativeElement.contentWindow?.postMessage({ print: true }, "*");
+  imprimir(cover?: any) {
+    this.printable.nativeElement.contentWindow?.postMessage({ print: true, cover }, "*");
   }
 
   printableContent: string =
@@ -65,8 +68,12 @@ export class AppComponent {
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="assets/style.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allison&display=swap">
+
         <style>
+          @page { margin: 0; }
+
           * {
             margin: 0;
             padding: 0;
@@ -76,7 +83,14 @@ export class AppComponent {
             margin-top: 10px;
           }
 
+          ul, ol {
+            margin-left: 2rem;
+          }
+
           .break-before { page-break-before: always; }
+
+          .break-after { page-break-after: always; }
+
           p > img {
             display: block;
             page-break-inside: avoid;
@@ -94,7 +108,41 @@ export class AppComponent {
       <div class="contenido"></div>
 
       <script>
-        window.imagesList = []
+        window.imagesList = [];
+        window.coverProperties = {};
+      </script>
+
+      <script>
+        window.checkCoverProperties = (printableCoverElement, editorCoverElement) => {
+          /* El cover ya ha sido insertado en dom */
+
+          /*OJO -> hay dos cover... el tag y el element*/
+
+          let coverObject = editorCoverElement.text;
+
+          /*Esto se podría hacer mucho más bonito joder*/
+          coverPropertiesObject = JSON.parse(editorCoverElement.textContent);
+
+          let subjectAbrev = document.getElementById("subjectAbrev");
+          subjectAbrev.innerText = coverPropertiesObject.subjectAbrev;
+
+          let subject = document.getElementById("subject");
+          subject.innerText = coverPropertiesObject.subject;
+
+          let taskAbrev = document.getElementById("taskAbrev");
+          taskAbrev.innerText = coverPropertiesObject.taskAbrev;
+
+          let task = document.getElementById("task");
+          task.innerText = coverPropertiesObject.task;
+
+          let author = document.getElementById("author");
+          author.innerText = coverPropertiesObject.author;
+
+          let date = document.getElementById("date");
+          date.innerText = coverPropertiesObject.date;
+
+          /*window.top.postMessage({saludo: "hooo"}, '*');*/
+        }
       </script>
 
       <script>
@@ -117,7 +165,60 @@ export class AppComponent {
               }
 
             } else if (event.data.print) {
-              window.print()
+
+              /*Aquí debería poner intercambio de cover si existe.*/
+
+              let editorCoverElement = document.querySelector("cover");
+              if(editorCoverElement) {
+                editorCoverElement.style.display = "none";
+                /*Si cover tiene contenido con id para sustituir*/
+                /*aquí se iria sustituyendo todo*/
+                /*eso lo dejo para despues*/
+
+                if (event.data.cover) {
+                  /*si viene cover con el print*/
+                  let contenido = document.querySelector(".contenido");
+
+                  let section = document.createElement("section");
+                  section.id = "cover";
+                  section.classList.add("break-after");
+                  section.innerHTML = event.data.cover;
+
+                  let style = document.createElement("style");
+                  style.innerText = "p { margin: 0; }";
+
+                  /*En algún momento hay que recorrer COVER para modificar contendio*/
+                  /*Creo que el mejor momento es tras ser insertado*/
+
+                  section.insertAdjacentElement("afterbegin", style);
+                  contenido.insertAdjacentElement("afterbegin", section);
+
+                  /*Osea aquí... pero también tengo que comprobar*/
+                  /*si se ha modificado algo...*/
+
+
+                  window.checkCoverProperties(section, editorCoverElement);
+
+
+                  window.print();
+                } else {
+                  /*Si no viene cover con el print*/
+                  /*Aquí si ya existe cover no hay que pedirlo*/
+                  let sectionCover = document.getElementById("cover");
+                  if (sectionCover) {
+                    window.print();
+                  } else {
+                    window.top.postMessage({cover: true}, '*');
+                  }
+                }
+              } else {
+                /*Si no hay etiqueta cover pero sí se añadió antes...*/
+                let sectionCover = document.getElementById("cover");
+                if (sectionCover) { sectionCover.remove(); }
+                /*Si no hay cover en el documento*/
+                window.print();
+              }
+
             } else if (event.data.images) {
 
               /* Solo me envian el último */

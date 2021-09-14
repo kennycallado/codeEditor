@@ -19,7 +19,8 @@
 <img [src]="imageSrc">
 
 <iframe class="hidden" #printable [src]="printableContent | safepipe" (load)="loadPrintable()"
-  [height]="printableHeight"></iframe>
+  [height]="printableHeight" width="100%" sandbox="allow-scripts allow-forms allow-modals allow-same-origin"></iframe>
+
 
 <!--
 <div class="container">
