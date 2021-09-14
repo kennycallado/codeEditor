@@ -14,4 +14,7 @@
   app-navigator, .row{
     display: none;
   }
+  .hidden {
+    display: block;
+  }
 }
