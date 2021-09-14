@@ -106,15 +106,7 @@ local y acceder.
 
 ### Desktop
 
-<<<<<<< HEAD
 Una de las principales ideas del proyecto era que fuese una aplicación ejecutable desde el escritorio ya que es como deseaba ejecutarla. Personalmente encuentro que para proyectos sencillos como este usar _electron_ no lo más apropiado.  Tras varias pruebas de _webview_ en diferentes lenguajes como _go_ y _rust_, decidí que lo más sencillo sería mantener el lenguaje (javascript) usando la herramienta `neutralinojs`. La encuentro muy apropiada para proyectos sencillos sin mucha carga de backend.
-=======
-Una de las principales ideas del proyecto era que fuese una aplicación ejecutable desde el escritorio ya que es como
-deseaba ejecutarla. Personalmente encuentro que para proyectos sencillos como este usar _electron_ no lo más apropiado.
-Tras varias pruebas de _webview_ en diferentes lenguajes coo _go_ y _rust_, decidí que lo más sencillo sería mantener el
-lenguaje (javascript) usando la herramienta `neutralinojs`. La encuentro muy apropiada para proyectos sencillos sin
-mucha carga de backend.
->>>>>>> testing-2
 
 ## Instalación
 
