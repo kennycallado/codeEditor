@@ -40,15 +40,12 @@ export class AppComponent {
 
     this.imageService.imagesList.subscribe((imagesList: File[]) => {
       if (imagesList.length > 0) {
-        let reader = new FileReader();
         for (const image of imagesList) {
           let imageName = image.name;
-
+          let reader = new FileReader();
           reader.onload = (event) => {
-
             this.printable.nativeElement.contentWindow?.postMessage({ images: true, name: imageName, content: event.target?.result }, '*');
           }
-
           reader.readAsDataURL(image);
         }
       }
